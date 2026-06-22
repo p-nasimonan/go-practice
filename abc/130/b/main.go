@@ -25,13 +25,15 @@ func main() {
 	}
 	var BoalXs = make([]int, n+1)
 	BoalXs[0] = 0
-	cnt := 0
-	for i := 1; i < n+1; i++ {
+	ans := 1
+
+	for i := 1; i <= n; i++ {
 		BoalXs[i] = BoalXs[i-1] + L[i-1]
-		if x < BoalXs[i] {
-			cnt = i
-			break
+
+		if BoalXs[i] <= x {
+			ans++
 		}
 	}
-	fmt.Println(cnt)
+
+	fmt.Println(ans)
 }
