@@ -2,33 +2,33 @@ package main
 
 import (
 	"fmt"
-	"maps"
 	"slices"
+	"strings"
 )
 
-func makelanking(N int, S []string, P []int) []int {
-	type CityRank struct {
-		Name  string
-		Ranks []int
-	}
-	tmpcitys := map[string]struct{}{}
-	for i := 0; i < N; i++ {
-		tmpcitys[S[i]] = struct{}{}
-	}
-	citys := slices.Collect(maps.Keys(tmpcitys))
-	cityranks := make([]CityRank, len(citys))
-	for i := 0; i < N; i++ {
-		if S[i] 
-	}
+type book struct {
+	i0    int
+	city  string
+	point int
 }
 
 func main() {
-	var N int
-	fmt.Scan(&N)
-	var S = make([]string, N)
-	var P = make([]int, N)
-	for i := 0; i < N; i++ {
-		fmt.Scan(&S[i], &P[i])
+	var n int
+	fmt.Scan(&n)
+	var books = make([]book, n)
+	for i := range books {
+		books[i].i0 = i + 1
+		fmt.Scan(&books[i].city, &books[i].point)
 	}
-	fmt.Println(makelanking(N, S, P))
+	slices.SortFunc(books, func(a, b book) int {
+		ans := strings.Compare(a.city, b.city)
+		if ans == 0 {
+			return b.point - a.point
+		}
+		return ans
+	})
+
+	for i := range books {
+		fmt.Println(books[i].i0)
+	}
 }
